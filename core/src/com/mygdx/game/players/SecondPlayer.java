@@ -1,23 +1,16 @@
 package com.mygdx.game.players;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.helpers.Const;
 
-public class SecondPlayer {
+public class SecondPlayer extends Sprite {
     private int posX,posY;
 
-    public SecondPlayer(){
+    public SecondPlayer(Texture body){
         //Base position
-        posX = 0; posY = Const.screenHeight/2;
+        super(body);
+        setX((Const.screenWidth/2) + 280);
+        setY(Const.screenHeight/4);
     }
 
-    //Sets coordinates for Second player
-    public void setX(int value){ posX += value; }
-    public void setY(int value){ posY += value; }
-
-    //Returns coordinates from Second player
-    public int getX(){
-        return posX;
-    }
-    public int getY(){
-        return posY;
-    }
 }

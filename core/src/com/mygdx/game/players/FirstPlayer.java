@@ -1,28 +1,20 @@
 package com.mygdx.game.players;
-
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.Control;
+import com.mygdx.game.CursedPong;
 import com.mygdx.game.helpers.Const;
+import com.mygdx.game.models.Models;
 
-public class FirstPlayer {
+public class FirstPlayer extends Sprite {
     private int posX,posY;
     public int dirY;
 
-    public FirstPlayer(){
+    public FirstPlayer(Texture body){
+        super(body);
         //Basic position
-        posX = 0;
-        posY = Const.screenHeight/2;
-    }
-
-    //Sets coordinates for First player
-    public void setX(int value){ posX += value; }
-    public void setY(int value){ posY += value; }
-
-    //Returns coordinates from First player
-    public int getX(){
-        return posX;
-    }
-    public int getY(){
-        return posY;
+        setX(-250);
+        setY(Const.screenHeight/4);
     }
 
     public void update(Control control){
@@ -31,6 +23,6 @@ public class FirstPlayer {
             dirY = 3;
         if(control.down)
             dirY -=3;
-        setY(dirY * Const.speed);
+        setY((dirY * Const.speed) + getY()) ;
     }
 }

@@ -13,6 +13,8 @@ import com.mygdx.game.models.Models;
 import com.mygdx.game.players.FirstPlayer;
 import com.mygdx.game.players.SecondPlayer;
 
+import java.awt.Rectangle;
+
 public class CursedPong extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
@@ -21,6 +23,8 @@ public class CursedPong extends ApplicationAdapter {
 	Ball ball;
 	FirstPlayer firstPlayer;
 	SecondPlayer secondPlayer;
+	Rectangle upperLimit, lowerLimit, line;
+
 	public Control control;
 
 	@Override
@@ -28,15 +32,18 @@ public class CursedPong extends ApplicationAdapter {
 		Models.loadTexture(); //Load our models for players + ball
 		batch = new SpriteBatch();
 
-		ball = new Ball(); //Ball
+		ball = new Ball(Models.ball); //Ball
 		//Players
-		firstPlayer = new FirstPlayer();
-		secondPlayer = new SecondPlayer();
+		firstPlayer = new FirstPlayer(Models.firstPlayer);
+		secondPlayer = new SecondPlayer(Models.secondPlayer);
 		//Camera
 		orthographicCamera = new OrthographicCamera();
 		orthographicCamera.setToOrtho(false, Const.screenWidth,Const.screenHeight);
 		orthographicCamera.position.set(Const.screenWidth,Const.screenHeight,0);
-
+		//Lines
+		upperLimit = new Rectangle(0,Const.screenHeight-10,Const.screenWidth,5);
+		lowerLimit = new Rectangle(0,10,Const.screenWidth,5);
+		line = new Rectangle(Const.screenWidth/2, 10, 2,Const.screenHeight-20);
 		control = new Control();
 		Gdx.input.setInputProcessor(control);
 
@@ -49,10 +56,10 @@ public class CursedPong extends ApplicationAdapter {
 		batch.begin();
 
 		batch.draw(img, 0, 0); //Background render
-		batch.draw(Models.ball, ball.getX(),ball.getY(),200,200); //Ball render
-		batch.draw(Models.firstPlayer,firstPlayer.getX() - 200, firstPlayer.getY()/2); //First player render
-		batch.draw(Models.secondPlayer, (Const.screenWidth/2) + 250,secondPlayer.getY()/2); //Second player render
 
+		ball.draw(batch); //Ball render
+		firstPlayer.draw(batch); //First player render
+		secondPlayer.draw(batch); //Second player render
 		firstPlayer.update(control);
 		batch.end();
 	}

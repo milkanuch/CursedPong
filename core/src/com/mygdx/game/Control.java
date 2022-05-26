@@ -3,15 +3,12 @@ package com.mygdx.game;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public class Control  extends InputAdapter implements InputProcessor {
     public boolean up;
     public boolean down;
 
-    public Control( ){
-    }
-    @Override
+    @Override //When the button is pressed
     public boolean keyUp(int keyCode) {
         switch (keyCode){
             case Input.Keys.W:
@@ -24,7 +21,7 @@ public class Control  extends InputAdapter implements InputProcessor {
         return false;
     }
 
-    @Override
+    @Override //When the button is not pressed
     public boolean keyDown(int keyCode) {
         switch (keyCode){
             case Input.Keys.W:
