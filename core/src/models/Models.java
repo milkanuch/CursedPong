@@ -13,6 +13,6 @@ public class Models {
         firstPlayer = new Texture("players_models/player1.png");
         secondPlayer = new Texture("players_models/player2.png");
 
-        ball = new Texture("balls/ball.png");
+        ball = new Texture("balls/ball-2.png");
     }
 }
