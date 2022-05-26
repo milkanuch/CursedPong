@@ -5,39 +5,42 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-import ball.Ball;
-import models.Models;
-import players.FirstPlayer;
-import players.SecondPlayer;
+import com.mygdx.game.ball.Ball;
+import com.mygdx.game.helpers.Const;
+import com.mygdx.game.models.Models;
+import com.mygdx.game.players.FirstPlayer;
+import com.mygdx.game.players.SecondPlayer;
 
 public class CursedPong extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	OrthographicCamera orthographicCamera;
 
-	Ball ball; FirstPlayer firstPlayer; SecondPlayer secondPlayer;
-	public int screenWidth,screenHeight;
+	Ball ball;
+	FirstPlayer firstPlayer;
+	SecondPlayer secondPlayer;
+	public Control control;
 
 	@Override
 	public void create () {
-		screenWidth = Gdx.graphics.getWidth();
-		screenHeight = Gdx.graphics.getHeight();
-
 		Models.loadTexture(); //Load our models for players + ball
 		batch = new SpriteBatch();
 
-		ball = new Ball();
+		ball = new Ball(); //Ball
+		//Players
 		firstPlayer = new FirstPlayer();
 		secondPlayer = new SecondPlayer();
 		//Camera
 		orthographicCamera = new OrthographicCamera();
-		orthographicCamera.setToOrtho(false,screenWidth,screenHeight);
-		orthographicCamera.position.set(screenWidth,screenHeight,0);
+		orthographicCamera.setToOrtho(false, Const.screenWidth,Const.screenHeight);
+		orthographicCamera.position.set(Const.screenWidth,Const.screenHeight,0);
 
-		img = new Texture("backgrounds/space.png");//Background
+		control = new Control();
+		Gdx.input.setInputProcessor(control);
+
+		img = new Texture("backgrounds/space.png"); //Background
 	}
 
 	@Override
@@ -47,9 +50,10 @@ public class CursedPong extends ApplicationAdapter {
 
 		batch.draw(img, 0, 0); //Background render
 		batch.draw(Models.ball, ball.getX(),ball.getY(),200,200); //Ball render
-		batch.draw(Models.firstPlayer,0, firstPlayer.getY()/2); //First player render
-		batch.draw(Models.secondPlayer, secondPlayer.getX() - 100,secondPlayer.getY()/2); //Second player render
+		batch.draw(Models.firstPlayer,firstPlayer.getX() - 200, firstPlayer.getY()/2); //First player render
+		batch.draw(Models.secondPlayer, (Const.screenWidth/2) + 250,secondPlayer.getY()/2); //Second player render
 
+		firstPlayer.update(control);
 		batch.end();
 	}
 	

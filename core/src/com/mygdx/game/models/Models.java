@@ -1,9 +1,9 @@
-package models;
+package com.mygdx.game.models;
 
 import com.badlogic.gdx.graphics.Texture;
 
 public class Models {
-    //Players models
+    //Players com.mygdx.game.models
     public static Texture firstPlayer,secondPlayer;
 
     //Ball

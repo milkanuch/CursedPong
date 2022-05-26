@@ -1,10 +1,12 @@
-package players;
-import com.badlogic.gdx.Gdx;
+package com.mygdx.game.players;
+import com.mygdx.game.helpers.Const;
+
 public class SecondPlayer {
     private int posX,posY;
 
     public SecondPlayer(){
-        posX = 0; posY = Gdx.graphics.getHeight()/2; //Base position
+        //Base position
+        posX = 0; posY = Const.screenHeight/2;
     }
 
     //Sets coordinates for Second player
