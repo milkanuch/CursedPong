@@ -13,15 +13,15 @@ public class FirstPlayer extends Sprite {
     public FirstPlayer(Texture body){
         super(body);
         //Basic position
-        setX(-250);
-        setY(Const.screenHeight/4);
+        setX(24);
+        setY(Const.screenHeight/2);
 
     }
 
     public void update(Control control){
         dirY = 0;
-        if(control.up)  dirY = 3;
-        if(control.down) dirY -=3;
+        if(control.up)  dirY = 1;
+        if(control.down) dirY -=1;
         setY((dirY * Const.speedFirstPlayer) + getY()) ;
     }
 }
