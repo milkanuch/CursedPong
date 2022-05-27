@@ -13,9 +13,7 @@ public class FirstPlayer extends Sprite {
     public FirstPlayer(Texture body){
         super(body);
         //Basic position
-        setX(24);
-        setY(Const.screenHeight/2);
-
+        setPlayerPosition();
     }
 
     public void update(Control control){
@@ -23,5 +21,10 @@ public class FirstPlayer extends Sprite {
         if(control.up)  dirY = 1;
         if(control.down) dirY -=1;
         setY((dirY * Const.speedFirstPlayer) + getY()) ;
+    }
+
+    public void setPlayerPosition(){
+        setX(24);
+        setY(Const.screenHeight/2);
     }
 }

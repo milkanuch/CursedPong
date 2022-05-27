@@ -9,13 +9,15 @@ public class SecondPlayer extends Sprite {
     public SecondPlayer(Texture body){
         //Base position
         super(body);
-        setX((Const.screenWidth) - 54);
-        System.out.println(getX());
-        setY(Const.screenHeight/2);
+        setPlayerPosition();
     }
 
     public void update(){
-        setY((0 + Const.speedSecondPlayer) + getY()) ;
+        setY((0 + Const.speedSecondPlayer) + getY());
+    }
+    public void setPlayerPosition(){
+        setX(Const.screenWidth - 54f);
+        setY(Const.screenHeight/2);
     }
 
 }

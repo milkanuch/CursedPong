@@ -9,7 +9,7 @@ public class DesktopLauncher {
 		config.setForegroundFPS(60);
 		config.setTitle("CursedPong");
 
-		config.setWindowSizeLimits(1280,720,1920,1080);
+		config.setWindowedMode(1600,1000);
 		new Lwjgl3Application(new CursedPong(), config);
 	}
 }
