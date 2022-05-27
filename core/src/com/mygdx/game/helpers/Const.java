@@ -3,6 +3,7 @@ package com.mygdx.game.helpers;
 import com.badlogic.gdx.Gdx;
 
 public class Const {
+    public static float ballNextPosition       = 0;
     public static int speedFirstPlayer         = 5;
     public static int speedSecondPlayer        = 5;
     public static int speedBall                = 5;

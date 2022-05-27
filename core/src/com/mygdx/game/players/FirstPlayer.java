@@ -7,7 +7,6 @@ import com.mygdx.game.helpers.Const;
 import com.mygdx.game.models.Models;
 
 public class FirstPlayer extends Sprite {
-    private int posX,posY;
     public int dirY;
 
     public FirstPlayer(Texture body){

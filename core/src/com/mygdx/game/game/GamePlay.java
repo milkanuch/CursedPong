@@ -2,6 +2,7 @@ package com.mygdx.game.game;
 
 import static com.mygdx.game.CursedPong.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.mygdx.game.UI.Score;
 import com.mygdx.game.helpers.Const;
 
 
@@ -36,23 +37,35 @@ public class GamePlay {
         if(ball.getBoundingRectangle().overlaps(upperLimit.getBoundingRectangle())) {
             ball.setY(Const.speedBall > 0 ? ball.getY() - Const.speedBall : ball.getY() + Const.speedBall);
             Const.verticalDirection = 0;
+            secondPlayer.calculateBallNextPosition();
         }
+
         if(ball.getBoundingRectangle().overlaps(lowerLimit.getBoundingRectangle())){
             ball.setY(Const.speedBall < 0 ? ball.getY() - Const.speedBall : ball.getY() + Const.speedBall);
             Const.verticalDirection = 1;
+            secondPlayer.calculateBallNextPosition();
         }
+
         if(ball.getBoundingRectangle().overlaps(secondPlayer.getBoundingRectangle())){
             ball.setX(ball.getX() - Const.speedBall * 2);
             Const.speedBall *= -1;
             Const.verticalDirection = Const.verticalDirection == 0 ? 0 : 1;
         }
+
         if(ball.getBoundingRectangle().overlaps(firstPlayer.getBoundingRectangle())){
             ball.setX(ball.getX() - Const.speedBall * 2);
             Const.speedBall *= -1;
             Const.verticalDirection = Const.verticalDirection == 0 ? 0 : 1;
         }
 
-        if (ball.getX() < 0 || ball.getX() > Const.screenWidth){
+        if (ball.getX() > Const.screenWidth - 40f){
+            System.out.println("X " + ball.getX() + " Y " + ball.getY() + " LOOSE  ");
+            Score.firstPlayerScore +=1;
+            gameReset();
+        }
+
+        if(ball.getX() < 0){
+            Score.secondPlayerScore += 1;
             gameReset();
         }
     }
@@ -62,7 +75,8 @@ public class GamePlay {
         secondPlayer.setPlayerPosition();
 
         ball.setBallPostion();
-
     }
+
+
 
 }
