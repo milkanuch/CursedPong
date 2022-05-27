@@ -61,6 +61,14 @@ public class CursedPong extends ApplicationAdapter {
 		firstPlayer.draw(batch); //First player render
 		secondPlayer.draw(batch); //Second player render
 		firstPlayer.update(control);
+		secondPlayer.update();
+		if(secondPlayer.getY() > Const.screenHeight - 400 || secondPlayer.getY() < -190 ){
+			Const.speedSecondPlayer *=-1;
+		}
+		ball.update();
+		if(firstPlayer.getBoundingRectangle().overlaps(ball.getBoundingRectangle()) || secondPlayer.getBoundingRectangle().overlaps(ball.getBoundingRectangle())) {
+			Const.speedBall *= -1;
+		}
 		batch.end();
 	}
 	

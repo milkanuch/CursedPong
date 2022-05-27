@@ -13,4 +13,8 @@ public class SecondPlayer extends Sprite {
         setY(Const.screenHeight/4);
     }
 
+    public void update(){
+        setY((0 + Const.speedSecondPlayer) + getY()) ;
+    }
+
 }
