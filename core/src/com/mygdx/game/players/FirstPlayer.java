@@ -2,9 +2,7 @@ package com.mygdx.game.players;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.Control;
-import com.mygdx.game.CursedPong;
 import com.mygdx.game.helpers.Const;
-import com.mygdx.game.models.Models;
 
 public class FirstPlayer extends Sprite {
     public int dirY;
