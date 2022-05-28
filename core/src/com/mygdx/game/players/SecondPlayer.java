@@ -1,8 +1,6 @@
 package com.mygdx.game.players;
 
-import static com.mygdx.game.CursedPong.ball;
-import static com.mygdx.game.CursedPong.secondPlayer;
-
+import static com.mygdx.game.UI.screens.PlayScreen.ball;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.helpers.Const;

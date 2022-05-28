@@ -26,7 +26,7 @@ public class Ball extends Sprite {
         }
     }
 
-    public void setBallPostion(){
+    public void setBallPosition(){
         setX(Const.screenWidth/2);
         setY(Const.screenHeight/2);
     }

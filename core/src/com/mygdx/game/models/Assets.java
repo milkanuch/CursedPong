@@ -11,7 +11,7 @@ public class Assets {
     //Ball
     public static Texture ball;
     //Menu and Hud
-    public static Texture score,pause,hard,easy,shop,play,exit,menu;
+    public static Texture score,pause,hard,easy,shop,play,exit,menu,background;
     //Game sounds
     public static Sound wallBounceSound,playersBounceSound,winSound,looseSound;
 
@@ -19,7 +19,7 @@ public class Assets {
         firstPlayer = new Texture("players_models/player.png"); //First player texture picture
         secondPlayer = new Texture("players_models/player1.png"); //First player texture picture
 
-        ball = new Texture("balls/ball1.png");  //Load ball as png picture
+        ball = new Texture("balls/ball2.png");  //Load ball as png picture
         //In game hud
         score = new Texture("menu/Score.png");
         pause = new Texture("menu/Pause.png");
@@ -31,6 +31,7 @@ public class Assets {
         menu = new Texture("menu/Menu.png");
         play = new Texture("menu/Play.png");
         exit = new Texture("menu/Exit.png");
+        background = new Texture("backgrounds/backg.png");//Background
         //Sounds
         wallBounceSound = Gdx.audio.newSound(Gdx.files.internal("sounds/wall-bounce.wav"));
         playersBounceSound = Gdx.audio.newSound(Gdx.files.internal("sounds/players-bounce.mp3"));
