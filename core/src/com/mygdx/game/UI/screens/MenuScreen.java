@@ -16,12 +16,12 @@ import com.mygdx.game.helpers.Const;
 import com.mygdx.game.models.Assets;
 
 public class MenuScreen implements Screen {
-    private final CursedPong app;
+    private final CursedPong cursedPong;
     private Stage stage;
     private ImageButton menu,play,shop,exit;
 
 
-    public MenuScreen(final CursedPong app) {
+    public MenuScreen(final CursedPong game) {
         //Set Menu button
         Drawable menuImage = new TextureRegionDrawable(new TextureRegion(Assets.menu));
         menu = new ImageButton(menuImage);
@@ -36,43 +36,42 @@ public class MenuScreen implements Screen {
         exit = new ImageButton(exitImage);
 
         //Making something like grid where we put our buttons;
-        this.app = app;
-        this.stage = new Stage(new FitViewport(Const.screenWidth, Const.screenHeight, app.orthographicCamera));
+        this.cursedPong = game;
+        this.stage = new Stage(new FitViewport(Const.screenWidth, Const.screenHeight, game.orthographicCamera));
     }
 
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
         stage.clear();
-
         buttonRender();
     }
 
     private void buttonRender() {
-        menu.setPosition((Const.screenWidth/2) - 300f,100f);
-        menu.setSize(500,100);
+        menu.setPosition(Const.screenWidth/2 - 205f,Const.screenHeight/2 + 100f);
+        menu.setSize(400,200);
 
-        play.setPosition((Const.screenWidth/2) - 300f, Const.screenHeight/2);
-        play.setSize(500,100);
+        play.setPosition(Const.screenWidth/2  - 125f, Const.screenHeight/2);
+        play.setSize(250,100);
         play.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                app.setScreen(app.playScreen);
+                cursedPong.setScreen(cursedPong.difficultyScreen);
             }
         });
 
-        shop.setPosition((Const.screenWidth/2) - 300f, (Const.screenHeight/2) - 50f);
-        shop.setSize(500,100);
+        shop.setPosition(Const.screenWidth/2 - 125f, (Const.screenHeight/2) - 100f);
+        shop.setSize(250,100);
 
-        exit.setPosition((Const.screenWidth/2) - 300f, (Const.screenHeight/2) - 100f);
-        exit.setSize(500, 100);
+        exit.setPosition(Const.screenWidth/2  - 125f, (Const.screenHeight/2) - 200f);
+        exit.setSize(250, 100);
         exit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
             }
         });
-
+        stage.addActor(menu);
         stage.addActor(play);
         stage.addActor(shop);
         stage.addActor(exit);

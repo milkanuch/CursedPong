@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Control;
 import com.mygdx.game.CursedPong;
-import com.mygdx.game.UI.Score;
 import com.mygdx.game.ball.Ball;
 import com.mygdx.game.game.GamePlay;
 import com.mygdx.game.helpers.Const;
@@ -82,8 +81,8 @@ public class PlayScreen implements Screen {
             gamePlay.secondPlayerLimits(); //Checking if second player over upper/lower limits
             gamePlay.ballLogic();  //Ball logic
 
-            bitmapFont.draw(batch,String.valueOf(Score.firstPlayerScore),230f,Const.screenHeight - 10f);
-            bitmapFont.draw(batch,String.valueOf(Score.secondPlayerScore),Const.screenWidth-250f,Const.screenHeight - 10f);
+            bitmapFont.draw(batch,String.valueOf(Const.firstPlayerScore),230f,Const.screenHeight - 10f);
+            bitmapFont.draw(batch,String.valueOf(Const.secondPlayerScore),Const.screenWidth-250f,Const.screenHeight - 10f);
             batch.end();
         }
 

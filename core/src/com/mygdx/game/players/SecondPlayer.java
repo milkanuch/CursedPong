@@ -13,12 +13,24 @@ public class SecondPlayer extends Sprite {
     }
 
     public void update() {
+        if(Const.levelOfDifficulty == 1){
+            easyDifficulty();
+        }
+        else{
+            hardDifficulty();
+        }
+    }
+
+    public void hardDifficulty(){
         if (ball.getY() < getY() + 40f) {
             setY(getY() - Const.speedSecondPlayer);
         }
         if (ball.getY() > getY()) {
             setY(getY() + Const.speedSecondPlayer);
         }
+    }
+    public void easyDifficulty(){
+        setY(getY() + Const.speedSecondPlayer);
     }
 
     public void setPlayerPosition() {

@@ -2,7 +2,6 @@ package com.mygdx.game.game;
 
 import static com.mygdx.game.UI.screens.PlayScreen.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.mygdx.game.UI.Score;
 import com.mygdx.game.helpers.Const;
 import com.mygdx.game.models.Assets;
 
@@ -71,11 +70,11 @@ public class GamePlay {
 
     public static void setWinner(int score){
         if(score > 0) { //First player sound and upp score
-            Score.firstPlayerScore += 1;
+            Const.firstPlayerScore += 1;
             Assets.playWinnerSound();
         }
         else { //Second player sound and upp score
-            Score.secondPlayerScore += 1;
+            Const.secondPlayerScore += 1;
             Assets.playLooserSound();
         }
         //Increase speed of players and change direction

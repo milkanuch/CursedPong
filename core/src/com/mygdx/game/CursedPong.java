@@ -7,10 +7,12 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.UI.screens.DifficultyScreen;
 import com.mygdx.game.UI.screens.LoadingScreen;
 import com.mygdx.game.UI.screens.LogoScreen;
 import com.mygdx.game.UI.screens.MenuScreen;
 import com.mygdx.game.UI.screens.PlayScreen;
+import com.mygdx.game.UI.screens.ShopScreen;
 import com.mygdx.game.helpers.Const;
 import com.mygdx.game.models.Assets;
 
@@ -25,6 +27,8 @@ public class CursedPong extends Game {
 	public LogoScreen logoScreen;
 	public MenuScreen menuScreen;
 	public LoadingScreen loadingScreen;
+	public DifficultyScreen difficultyScreen;
+	public ShopScreen shopScreen;
 
 	@Override
 	public void create() {
@@ -42,7 +46,8 @@ public class CursedPong extends Game {
 		logoScreen = new LogoScreen(this);
 		menuScreen = new MenuScreen(this);
 		loadingScreen = new LoadingScreen(this);
-
+		difficultyScreen = new DifficultyScreen(this);
+		shopScreen = new ShopScreen(this);
 
 		Gdx.input.setInputProcessor(control);
 

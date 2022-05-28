@@ -26,7 +26,7 @@ public class LoadingScreen implements Screen {
             shapeRenderer.setProjectionMatrix(cursedPong.orthographicCamera.combined);
             this.progress = 0f;
 
-            cursedPong.assetsManager.load("backgrounds/back.png", Texture.class);
+            cursedPong.assetsManager.load("backgrounds/coffee.png", Texture.class);
             cursedPong.assetsManager.load("ui/skin.atlas", TextureAtlas.class);
         }
 

@@ -34,22 +34,22 @@ public class LogoScreen implements Screen {
                     cursedPong.setScreen(cursedPong.menuScreen);
                }
            };
-          Texture splashTex = cursedPong.assetsManager.get("backgrounds/back.png", Texture.class);
+          Texture splashTex = cursedPong.assetsManager.get("backgrounds/coffee.png", Texture.class);
           splashImg = new Image(splashTex);
-          splashImg.setOrigin(splashImg.getWidth() / 2, splashImg.getHeight() / 2);
-          splashImg.setPosition(stage.getWidth() / 2 - 32, stage.getHeight() + 32);
+          splashImg.setOrigin(splashImg.getWidth(), splashImg.getHeight() );
+          splashImg.setPosition(0, 0);
           splashImg.addAction(sequence(alpha(0), scaleTo(.1f, .1f),
-                parallel(fadeIn(2f, Interpolation.pow2),
-                        scaleTo(2f, 2f, 2.5f, Interpolation.pow5),
-                        moveTo(stage.getWidth() / 2 - 32, stage.getHeight() / 2 - 32, 2f, Interpolation.swing)),
-                delay(1.5f), fadeOut(1.25f), run(transitionRunnable)));
+                parallel(fadeIn(1f, Interpolation.pow2),
+                        scaleTo(1f, 1f, 1.5f, Interpolation.pow5),
+                        moveTo(-80f  ,100f , 2f, Interpolation.swing)),
+                delay(1.5f), fadeOut(1.5f), run(transitionRunnable)));
 
           stage.addActor(splashImg);
         }
 
         @Override
         public void render(float delta) {
-           Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
+           Gdx.gl.glClearColor(0.41f, 0.23f,0.72f, 1f);
            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
            stage.act(delta);
 
