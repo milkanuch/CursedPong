@@ -17,8 +17,8 @@ import com.mygdx.game.models.Assets;
 
 public class DifficultyScreen implements Screen {
     private final CursedPong cursedPong;
-    private Stage stage;
-    private ImageButton easy,hard;
+    private final Stage stage;
+    private final ImageButton easy,hard;
 
     public DifficultyScreen(final CursedPong game){
         //Easy

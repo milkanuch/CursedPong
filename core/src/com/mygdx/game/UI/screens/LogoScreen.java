@@ -16,10 +16,9 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 public class LogoScreen implements Screen {
         private final CursedPong cursedPong;
 
-        private Stage stage;
-        private Image splashImg;
+        private final Stage stage;
 
-        public LogoScreen(CursedPong game){
+    public LogoScreen(CursedPong game){
            this.cursedPong = game;
            this.stage = new Stage(new FitViewport(Const.screenWidth, Const.screenHeight, game.orthographicCamera));
         }
@@ -28,14 +27,14 @@ public class LogoScreen implements Screen {
         public void show() {
            Gdx.input.setInputProcessor(stage);
 
-           Runnable transitionRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    cursedPong.setScreen(cursedPong.menuScreen);
-               }
-           };
+          Runnable transitionRunnable = new Runnable() {
+            @Override
+            public void run() {
+                  cursedPong.setScreen(cursedPong.menuScreen);
+              }
+          };
           Texture splashTex = cursedPong.assetsManager.get("backgrounds/coffee.png", Texture.class);
-          splashImg = new Image(splashTex);
+          Image splashImg = new Image(splashTex);
           splashImg.setOrigin(splashImg.getWidth(), splashImg.getHeight() );
           splashImg.setPosition(0, 0);
           splashImg.addAction(sequence(alpha(0), scaleTo(.1f, .1f),

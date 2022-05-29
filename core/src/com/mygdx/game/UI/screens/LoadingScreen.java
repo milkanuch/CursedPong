@@ -2,7 +2,6 @@ package com.mygdx.game.UI.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -10,12 +9,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.mygdx.game.CursedPong;
 
+
 public class LoadingScreen implements Screen {
         private final CursedPong cursedPong;
 
-        private ShapeRenderer shapeRenderer;
+        private final ShapeRenderer shapeRenderer;
         private float progress;
-
         public LoadingScreen(CursedPong game){
             this.cursedPong = game;
             this.shapeRenderer = new ShapeRenderer();
@@ -43,12 +42,11 @@ public class LoadingScreen implements Screen {
           Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
           update();
-
           shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-          shapeRenderer.setColor(Color.BLACK);
+          shapeRenderer.setColor(0.16f,0.16f,0.16f,1f);
           shapeRenderer.rect(32, cursedPong.orthographicCamera.viewportHeight / 2 - 8, cursedPong.orthographicCamera.viewportWidth - 64, 16);
 
-          shapeRenderer.setColor(Color.PURPLE);
+          shapeRenderer.setColor(0.41f, 0.23f,0.72f, 1f);
           shapeRenderer.rect(32, cursedPong.orthographicCamera.viewportHeight / 2 - 8, progress * (cursedPong.orthographicCamera.viewportWidth - 64), 16);
           shapeRenderer.end();
         }

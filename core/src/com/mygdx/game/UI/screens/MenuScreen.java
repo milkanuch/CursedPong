@@ -3,6 +3,7 @@ package com.mygdx.game.UI.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -17,9 +18,9 @@ import com.mygdx.game.models.Assets;
 
 public class MenuScreen implements Screen {
     private final CursedPong cursedPong;
-    private Stage stage;
-    private ImageButton menu,play,shop,exit;
-
+    private final Stage stage;
+    private final ImageButton menu,play,shop,exit;
+    private final SpriteBatch batch;
 
     public MenuScreen(final CursedPong game) {
         //Set Menu button
@@ -36,6 +37,7 @@ public class MenuScreen implements Screen {
         exit = new ImageButton(exitImage);
 
         //Making something like grid where we put our buttons;
+        batch = new SpriteBatch();
         this.cursedPong = game;
         this.stage = new Stage(new FitViewport(Const.screenWidth, Const.screenHeight, game.orthographicCamera));
     }
@@ -62,7 +64,12 @@ public class MenuScreen implements Screen {
 
         shop.setPosition(Const.screenWidth/2 - 125f, (Const.screenHeight/2) - 100f);
         shop.setSize(250,100);
-
+        shop.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                cursedPong.setScreen(cursedPong.shopScreen);
+            }
+        });
         exit.setPosition(Const.screenWidth/2  - 125f, (Const.screenHeight/2) - 200f);
         exit.setSize(250, 100);
         exit.addListener(new ClickListener() {
@@ -85,9 +92,11 @@ public class MenuScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        batch.begin();
         update(delta);
 
+        batch.draw(Assets.menuBackground,0,0);
+        batch.end();
         stage.draw();
     }
 
@@ -97,24 +106,16 @@ public class MenuScreen implements Screen {
     }
 
     @Override
-    public void pause() {
-
-    }
+    public void pause() { }
 
     @Override
-    public void resume() {
-
-    }
+    public void resume() { }
 
     @Override
-    public void hide() {
-
-    }
-
+    public void hide() { }
     @Override
     public void dispose() {
         stage.dispose();
     }
-
 
 }
