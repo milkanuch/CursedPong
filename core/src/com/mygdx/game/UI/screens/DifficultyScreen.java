@@ -3,6 +3,7 @@ package com.mygdx.game.UI.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -18,7 +19,8 @@ import com.mygdx.game.models.Assets;
 public class DifficultyScreen implements Screen {
     private final CursedPong cursedPong;
     private final Stage stage;
-    private final ImageButton easy,hard;
+    private final ImageButton easy,hard,arcade;
+    private final SpriteBatch batch;
 
     public DifficultyScreen(final CursedPong game){
         //Easy
@@ -28,7 +30,11 @@ public class DifficultyScreen implements Screen {
         Drawable hardImage = new TextureRegionDrawable(new TextureRegion(Assets.hard));
         hard = new ImageButton(hardImage);
 
+        Drawable arcadeImage = new TextureRegionDrawable(new TextureRegion(Assets.arcade));
+        arcade = new ImageButton(arcadeImage);
+
         //Making something like grid where we put our buttons;
+        batch = new SpriteBatch();
         this.cursedPong = game;
         this.stage = new Stage(new FitViewport(Const.screenWidth, Const.screenHeight, game.orthographicCamera));
     }
@@ -38,35 +44,50 @@ public class DifficultyScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         stage.clear();
 
-        easy.setPosition(Const.screenWidth/2 - 350f,Const.screenHeight/2);
+        easy.setPosition(Const.screenWidth/2 - 300f,Const.screenHeight/2);
         easy.setSize(250,100);
         easy.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
                 cursedPong.setScreen(cursedPong.playScreen);
                 Const.levelOfDifficulty = 1;
+                Const.arcadeMode = false;
             }
         });
 
-        hard.setPosition(Const.screenWidth/2 + 100f,Const.screenHeight/2);
+        hard.setPosition(Const.screenWidth/2 + 50f,Const.screenHeight/2);
         hard.setSize(250,100);
         hard.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
                 cursedPong.setScreen(cursedPong.playScreen);
                 Const.levelOfDifficulty = 2;
+                Const.arcadeMode = false;
+            }
+        });
+
+        arcade.setPosition(Const.screenWidth/2 - 250f,Const.screenHeight/2 - 120f);
+        arcade.setSize(500,100);
+        arcade.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event,float x,float y){
+                Const.arcadeMode = true;
+                cursedPong.setScreen(cursedPong.playScreen);
             }
         });
 
         stage.addActor(easy);
         stage.addActor(hard);
+        stage.addActor(arcade);
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        batch.begin();
+        batch.draw(Assets.menuBackground,0,0);
+        batch.end();
         update(delta);
 
         stage.draw();

@@ -6,7 +6,6 @@ import com.mygdx.game.helpers.Const;
 
 public class FirstPlayer extends Sprite {
     public int dirY;
-
     public FirstPlayer(Texture body){
         super(body);
         //Basic position
@@ -17,11 +16,17 @@ public class FirstPlayer extends Sprite {
         dirY = 0;
         if(control.up)  dirY = 1;
         if(control.down) dirY -=1;
-        setY((dirY * Const.speedFirstPlayer) + getY()) ;
+        setY((dirY * Const.speedFirstPlayer) + getY());
     }
 
     public void setPlayerPosition(){
-        setX(24);
-        setY(Const.screenHeight/2);
+        if(!Const.arcadeMode) {
+            setX(24);
+            setY(Const.screenHeight / 2);
+        }
+        else{
+            setX(24);
+            setY(250);
+        }
     }
 }

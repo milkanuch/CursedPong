@@ -2,7 +2,6 @@ package com.mygdx.game.UI.screens;
 
 import static com.mygdx.game.game.GamePlay.*;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -31,7 +30,6 @@ public class PlayScreen implements Screen {
         private final GamePlay gamePlay;
         public Control control;
 
-
         public  PlayScreen(final CursedPong game){
             batch = new SpriteBatch();
             ball = new Ball(Assets.ball); //Ball
@@ -44,7 +42,6 @@ public class PlayScreen implements Screen {
             orthographicCamera.position.set(Const.screenWidth,Const.screenHeight,0);
             //Lines
             control = new Control();
-
             bitmapFont = new BitmapFont();
             bitmapFont.setColor(1f,1f,1f,1);
             bitmapFont.getData().setScale(4,4);
@@ -55,7 +52,6 @@ public class PlayScreen implements Screen {
         @Override
         public void show() {
             Gdx.input.setInputProcessor(control);
-
         }
 
         @Override
@@ -70,12 +66,15 @@ public class PlayScreen implements Screen {
 
             firstPlayer.draw(batch); //First player render
             secondPlayer.draw(batch); //Second player render
+            //Moving our player
 
-            firstPlayer.update(control); //Moving our player
+            firstPlayer.update(control);
+            gamePlay.firstPlayerLimits();
+
             secondPlayer.update(); //Moving ai player
             ball.update(); //Moving ball
 
-            gamePlay.firstPlayerLimits(); //Checking if first player over upper/lower limits
+            //Checking if first player over upper/lower limits
             gamePlay.secondPlayerLimits(); //Checking if second player over upper/lower limits
             ballLogic();  //Ball logic
 

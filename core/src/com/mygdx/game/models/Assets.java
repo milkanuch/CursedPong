@@ -12,7 +12,7 @@ public class Assets {
     public static Texture ball;
     public static Texture ball1,ball2,ball3,ball4;
     //Menu and Hud
-    public static Texture score,pause,hard,easy,shop,play,exit,menu,back,use,menuBackground,background;
+    public static Texture score,hard,easy,shop,play,exit,menu,back,use,menuBackground,arcade,background;
     //Game sounds
     public static Sound wallBounceSound,playersBounceSound,winSound,looseSound;
 
@@ -23,7 +23,6 @@ public class Assets {
         ball = new Texture("balls/ball2.png");  //Load ball as png picture
         //In game hud
         score = new Texture("menu/Score.png");
-        pause = new Texture("menu/Pause.png");
         //Levels of difficulty
         hard = new Texture("menu/Hard.png");
         easy = new Texture("menu/Easy.png");
@@ -34,6 +33,7 @@ public class Assets {
         exit = new Texture("menu/Exit.png");
         back = new Texture("menu/Back.png");
         use = new Texture("menu/Use.png");
+        arcade = new Texture("menu/Arcade.png");
 
         //Textures for sale
         //Player models

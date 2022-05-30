@@ -50,7 +50,12 @@ public class GamePlay {
         if(ball.getBoundingRectangle().overlaps(secondPlayer.getBoundingRectangle())){
             ball.setX(ball.getX() - Const.speedBall * 2);
             Const.speedBall *= -1;
-            Const.verticalDirection = Const.verticalDirection == 0 ? 0 : 1;
+            if(ball.getY() > secondPlayer.getY() - 40f || ball.getY() - 70f < secondPlayer.getY() ){
+                Const.verticalDirection = ball.getY() - 70f < secondPlayer.getY() ? 0 : 1;
+            }
+            else {
+                Const.verticalDirection = Const.verticalDirection == 0 ? 0 : 1;
+            }
 
             Assets.playPlayersBounceSound();
         }
@@ -58,7 +63,12 @@ public class GamePlay {
         if(ball.getBoundingRectangle().overlaps(firstPlayer.getBoundingRectangle())){
             ball.setX(ball.getX() - Const.speedBall * 2);
             Const.speedBall *= -1;
-            Const.verticalDirection = Const.verticalDirection == 0 ? 0 : 1;
+            if(ball.getY() - 40f > firstPlayer.getY() || ball.getY() - 70f < firstPlayer.getY()){
+                Const.verticalDirection = ball.getY() - 40f > firstPlayer.getY() ? 1 : 0;
+            }
+            else{
+                Const.verticalDirection = Const.verticalDirection == 0 ? 0 : 1;
+            }
 
             Assets.playPlayersBounceSound();
         }
@@ -78,12 +88,18 @@ public class GamePlay {
             Assets.playLooserSound();
         }
         //Increase speed of players and change direction
-        Const.speedBall = Const.speedBall > 0 ? (Const.speedBall * -score) + 0.11f : (Const.speedBall * score) + 0.11f;
+        Const.speedBall = Const.speedBall > 0 ? (Const.speedBall * -score) + 0.06f : (Const.speedBall * score) + 0.06f;
         Const.speedSecondPlayer = Const.speedFirstPlayer += 0.11f;
         gameReset();
     }
+
     //Reset Game Object position
     public static void gameReset(){
+        /* I think it doesn't make sense
+        if(Const.firstPlayerScore == 11 || Const.secondPlayerScore == 11){
+            Const.firstPlayerScore = 0;
+            Const.secondPlayerScore = 0;
+        }*/
         firstPlayer.setPlayerPosition();
         secondPlayer.setPlayerPosition();
 
