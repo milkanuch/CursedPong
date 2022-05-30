@@ -20,13 +20,7 @@ public class FirstPlayer extends Sprite {
     }
 
     public void setPlayerPosition(){
-        if(!Const.arcadeMode) {
-            setX(24);
-            setY(Const.screenHeight / 2);
-        }
-        else{
-            setX(24);
-            setY(250);
-        }
+        setX(24);
+        setY(Const.screenHeight / 2);
     }
 }

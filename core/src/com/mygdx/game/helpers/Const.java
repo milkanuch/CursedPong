@@ -9,6 +9,7 @@ public class Const {
     public static int secondPlayerScore        = 0;
     public static int levelOfDifficulty        = 0;
     public static int verticalDirection        = 1;
+    public static int gameWinner               = 0;
     //public static float ballNextPosition     = 0;
     public static float speedFirstPlayer       = 5;
     public static float speedSecondPlayer      = 5;

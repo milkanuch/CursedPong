@@ -1,14 +1,17 @@
 package com.mygdx.game.game;
 
 import static com.mygdx.game.UI.screens.PlayScreen.*;
+
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.mygdx.game.CursedPong;
+import com.mygdx.game.UI.screens.PlayScreen;
 import com.mygdx.game.helpers.Const;
 import com.mygdx.game.models.Assets;
 
 public class GamePlay {
     public static Sprite lowerLimit,upperLimit;
-
-    public GamePlay(){
+    public GamePlay(final CursedPong game){
         lowerLimit = new Sprite();
         lowerLimit.setPosition(0,0);
         lowerLimit.setSize(Const.screenWidth,5);
@@ -32,7 +35,7 @@ public class GamePlay {
         }
     }
 
-    public static void ballLogic(){
+    public  void ballLogic(){
         if(ball.getBoundingRectangle().overlaps(upperLimit.getBoundingRectangle())) {
             ball.setY(Const.speedBall > 0 ? ball.getY() - Const.speedBall : ball.getY() + Const.speedBall);
             Const.verticalDirection = 0;
@@ -50,8 +53,8 @@ public class GamePlay {
         if(ball.getBoundingRectangle().overlaps(secondPlayer.getBoundingRectangle())){
             ball.setX(ball.getX() - Const.speedBall * 2);
             Const.speedBall *= -1;
-            if(ball.getY() > secondPlayer.getY() - 40f || ball.getY() - 70f < secondPlayer.getY() ){
-                Const.verticalDirection = ball.getY() - 70f < secondPlayer.getY() ? 0 : 1;
+            if(ball.getY() > secondPlayer.getY() - 20f || ball.getY() - 70f < secondPlayer.getY()) {
+                Const.verticalDirection = ball.getY() - 20f  > secondPlayer.getY() ? 1 : 0;
             }
             else {
                 Const.verticalDirection = Const.verticalDirection == 0 ? 0 : 1;
@@ -63,8 +66,8 @@ public class GamePlay {
         if(ball.getBoundingRectangle().overlaps(firstPlayer.getBoundingRectangle())){
             ball.setX(ball.getX() - Const.speedBall * 2);
             Const.speedBall *= -1;
-            if(ball.getY() - 40f > firstPlayer.getY() || ball.getY() - 70f < firstPlayer.getY()){
-                Const.verticalDirection = ball.getY() - 40f > firstPlayer.getY() ? 1 : 0;
+            if(ball.getY() - 20f > firstPlayer.getY() || ball.getY() - 70f < firstPlayer.getY()) {
+                Const.verticalDirection = ball.getY() - 20f > firstPlayer.getY() ? 1 : 0;
             }
             else{
                 Const.verticalDirection = Const.verticalDirection == 0 ? 0 : 1;
@@ -74,11 +77,11 @@ public class GamePlay {
         }
 
         if (ball.getX() > Const.screenWidth - 40f || ball.getX() < 0) {
-            setWinner(ball.getX() < 0 ? -1 : 1);
+            gameReset(ball.getX() < 0 ? -1 : 1);
         }
     }
 
-    public static void setWinner(int score){
+    public  void gameReset(int score){
         if(score > 0) { //First player sound and upp score
             Const.firstPlayerScore += 1;
             Assets.playWinnerSound();
@@ -90,20 +93,10 @@ public class GamePlay {
         //Increase speed of players and change direction
         Const.speedBall = Const.speedBall > 0 ? (Const.speedBall * -score) + 0.06f : (Const.speedBall * score) + 0.06f;
         Const.speedSecondPlayer = Const.speedFirstPlayer += 0.11f;
-        gameReset();
-    }
 
-    //Reset Game Object position
-    public static void gameReset(){
-        /* I think it doesn't make sense
-        if(Const.firstPlayerScore == 11 || Const.secondPlayerScore == 11){
-            Const.firstPlayerScore = 0;
-            Const.secondPlayerScore = 0;
-        }*/
         firstPlayer.setPlayerPosition();
         secondPlayer.setPlayerPosition();
 
         ball.setBallPosition();
     }
-
 }

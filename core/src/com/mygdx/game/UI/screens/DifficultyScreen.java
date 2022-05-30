@@ -19,7 +19,7 @@ import com.mygdx.game.models.Assets;
 public class DifficultyScreen implements Screen {
     private final CursedPong cursedPong;
     private final Stage stage;
-    private final ImageButton easy,hard,arcade;
+    private final ImageButton easy,hard,back;
     private final SpriteBatch batch;
 
     public DifficultyScreen(final CursedPong game){
@@ -30,8 +30,8 @@ public class DifficultyScreen implements Screen {
         Drawable hardImage = new TextureRegionDrawable(new TextureRegion(Assets.hard));
         hard = new ImageButton(hardImage);
 
-        Drawable arcadeImage = new TextureRegionDrawable(new TextureRegion(Assets.arcade));
-        arcade = new ImageButton(arcadeImage);
+        Drawable backImage = new TextureRegionDrawable(new TextureRegion(Assets.back));
+        back = new ImageButton(backImage);
 
         //Making something like grid where we put our buttons;
         batch = new SpriteBatch();
@@ -66,19 +66,18 @@ public class DifficultyScreen implements Screen {
             }
         });
 
-        arcade.setPosition(Const.screenWidth/2 - 250f,Const.screenHeight/2 - 120f);
-        arcade.setSize(500,100);
-        arcade.addListener(new ClickListener(){
+        back.setPosition(Const.screenWidth/2 - 250f,Const.screenHeight/2 - 120f);
+        back.setSize(500,100);
+        back.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event,float x,float y){
-                Const.arcadeMode = true;
-                cursedPong.setScreen(cursedPong.playScreen);
+                cursedPong.setScreen(cursedPong.menuScreen);
             }
         });
 
         stage.addActor(easy);
         stage.addActor(hard);
-        stage.addActor(arcade);
+        stage.addActor(back);
     }
 
     @Override

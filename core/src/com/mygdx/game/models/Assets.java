@@ -12,7 +12,7 @@ public class Assets {
     public static Texture ball;
     public static Texture ball1,ball2,ball3,ball4;
     //Menu and Hud
-    public static Texture score,hard,easy,shop,play,exit,menu,back,use,menuBackground,arcade,background;
+    public static Texture score,hard,easy,shop,play,exit,menu,back,use,menuBackground,arcade,background,firstPlayerWin,secondPlayerWin,timer;
     //Game sounds
     public static Sound wallBounceSound,playersBounceSound,winSound,looseSound;
 
@@ -33,6 +33,7 @@ public class Assets {
         exit = new Texture("menu/Exit.png");
         back = new Texture("menu/Back.png");
         use = new Texture("menu/Use.png");
+        timer = new Texture("menu/timer.png");
         arcade = new Texture("menu/Arcade.png");
 
         //Textures for sale
@@ -53,6 +54,8 @@ public class Assets {
 
         background = new Texture("backgrounds/backg.png");//Background
         menuBackground = new Texture("backgrounds/menu_background.png");
+        firstPlayerWin = new Texture("backgrounds/player1win.png");
+        secondPlayerWin = new Texture("backgrounds/player2win.png");
 
         //Sounds
         wallBounceSound = Gdx.audio.newSound(Gdx.files.internal("sounds/wall-bounce.wav"));

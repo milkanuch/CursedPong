@@ -17,8 +17,11 @@ import com.mygdx.game.models.Assets;
 import com.mygdx.game.players.FirstPlayer;
 import com.mygdx.game.players.SecondPlayer;
 
+import java.text.DecimalFormat;
+
 public class PlayScreen implements Screen {
         private final CursedPong cursedPong;
+
         private final SpriteBatch batch;
         public OrthographicCamera orthographicCamera;
 
@@ -26,11 +29,11 @@ public class PlayScreen implements Screen {
         public static FirstPlayer firstPlayer;
         public static SecondPlayer secondPlayer;
 
-        private final BitmapFont bitmapFont;
+        private final BitmapFont bitmapFont,timerFont;
         private final GamePlay gamePlay;
         public Control control;
-
-        public  PlayScreen(final CursedPong game){
+        private static float time;
+        public PlayScreen(final CursedPong game){
             batch = new SpriteBatch();
             ball = new Ball(Assets.ball); //Ball
             //Players
@@ -43,9 +46,13 @@ public class PlayScreen implements Screen {
             //Lines
             control = new Control();
             bitmapFont = new BitmapFont();
-            bitmapFont.setColor(1f,1f,1f,1);
+            timerFont = new BitmapFont();
+            bitmapFont.setColor(0.9f,0.9f,0.9f,0.9f);
             bitmapFont.getData().setScale(4,4);
-            gamePlay = new GamePlay();
+            timerFont.setColor(0.9f,0.9f,0.9f,0.9f);
+            timerFont.getData().setScale(2,2);
+            time = 0;
+            gamePlay = new GamePlay(game);
             this.cursedPong = game;
         }
 
@@ -76,11 +83,16 @@ public class PlayScreen implements Screen {
 
             //Checking if first player over upper/lower limits
             gamePlay.secondPlayerLimits(); //Checking if second player over upper/lower limits
-            ballLogic();  //Ball logic
+            gamePlay.ballLogic();  //Ball logic
 
+            batch.draw(Assets.timer,Const.screenWidth/2 - 60f,Const.screenHeight - 77f,125,66);
+            time += delta;
             bitmapFont.draw(batch,String.valueOf(Const.firstPlayerScore),230f,Const.screenHeight - 10f);
             bitmapFont.draw(batch,String.valueOf(Const.secondPlayerScore),Const.screenWidth-300f,Const.screenHeight - 10f);
+            timerFont.draw(batch,String.format("%.0f",time) + " s",Const.screenWidth/2 - 15f,Const.screenHeight - 32f);
+
             mainMenu();
+            setWinner();
             batch.end();
         }
 
@@ -88,6 +100,16 @@ public class PlayScreen implements Screen {
             if(Const.mainMenu){
                 cursedPong.setScreen(cursedPong.menuScreen);
                 Const.mainMenu = false;
+            }
+        }
+
+        public  void setWinner() {
+            if (Const.firstPlayerScore == 1 || Const.secondPlayerScore == 1) {
+                Const.gameWinner = Const.firstPlayerScore == 1 ? 1 : 2;
+                System.out.println(Const.firstPlayerScore);
+                cursedPong.setScreen(cursedPong.winnersScreen);
+                Const.firstPlayerScore = 0;
+                Const.secondPlayerScore = 0;
             }
         }
 
