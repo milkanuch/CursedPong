@@ -10,7 +10,7 @@ import com.mygdx.game.UI.screens.LogoScreen;
 import com.mygdx.game.UI.screens.MenuScreen;
 import com.mygdx.game.UI.screens.PlayScreen;
 import com.mygdx.game.UI.screens.ShopScreen;
-import com.mygdx.game.UI.screens.WinnersScreen;
+import com.mygdx.game.UI.screens.WinnerScreen;
 import com.mygdx.game.helpers.Const;
 import com.mygdx.game.models.Assets;
 
@@ -27,7 +27,7 @@ public class CursedPong extends Game {
 	public LoadingScreen loadingScreen;
 	public DifficultyScreen difficultyScreen;
 	public ShopScreen shopScreen;
-	public WinnersScreen winnersScreen;
+	public WinnerScreen winnerScreen;
 
 	@Override
 	public void create() {
@@ -47,7 +47,7 @@ public class CursedPong extends Game {
 		loadingScreen = new LoadingScreen(this);
 		difficultyScreen = new DifficultyScreen(this);
 		shopScreen = new ShopScreen(this);
-		winnersScreen = new WinnersScreen(this);
+		winnerScreen = new WinnerScreen(this);
 
 		this.setScreen(loadingScreen);
 	}

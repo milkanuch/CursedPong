@@ -14,6 +14,6 @@ public class Const {
     public static float speedFirstPlayer       = 5;
     public static float speedSecondPlayer      = 5;
     public static float speedBall              = 6;
-    public static float screenWidth              = Gdx.graphics.getWidth();
-    public static float screenHeight             = Gdx.graphics.getHeight();
+    public static float screenWidth            = Gdx.graphics.getWidth();
+    public static float screenHeight           = Gdx.graphics.getHeight();
 }

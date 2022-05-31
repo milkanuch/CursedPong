@@ -18,32 +18,34 @@ public class LogoScreen implements Screen {
 
         private final Stage stage;
 
-    public LogoScreen(CursedPong game){
+        public LogoScreen(CursedPong game){
            this.cursedPong = game;
            this.stage = new Stage(new FitViewport(Const.screenWidth, Const.screenHeight, game.orthographicCamera));
         }
 
         @Override
         public void show() {
-           Gdx.input.setInputProcessor(stage);
-
+          Gdx.input.setInputProcessor(stage);
+          //Switches to the menu screen when the animation ends
           Runnable transitionRunnable = new Runnable() {
             @Override
             public void run() {
                   cursedPong.setScreen(cursedPong.menuScreen);
               }
           };
-          Texture splashTex = cursedPong.assetsManager.get("backgrounds/coffee.png", Texture.class);
-          Image splashImg = new Image(splashTex);
-          splashImg.setOrigin(splashImg.getWidth(), splashImg.getHeight() );
-          splashImg.setPosition(0, 0);
-          splashImg.addAction(sequence(alpha(0), scaleTo(.1f, .1f),
+          Texture splashTex = cursedPong.assetsManager.get("backgrounds/coffee.png", Texture.class); //Our  logo
+          //Logo settings
+          Image logo = new Image(splashTex);
+          logo.setOrigin(logo.getWidth(), logo.getHeight() );
+          logo.setPosition(0, 0);
+          //Making spin animation
+          logo.addAction(sequence(alpha(0), scaleTo(.1f, .1f),
                 parallel(fadeIn(1f, Interpolation.pow2),
                         scaleTo(1f, 1f, 1.5f, Interpolation.pow5),
                         moveTo(-80f  ,100f , 2f, Interpolation.swing)),
                 delay(1.5f), fadeOut(1.5f), run(transitionRunnable)));
 
-          stage.addActor(splashImg);
+          stage.addActor(logo);
         }
 
         @Override
@@ -61,21 +63,14 @@ public class LogoScreen implements Screen {
         }
 
         @Override
-        public void pause() {
-
-        }
+        public void pause() { }
 
         @Override
-        public void resume() {
-
-        }
+        public void resume() { }
 
         @Override
-        public void hide() {
-
-        }
+        public void hide() { }
 
         @Override
-        public void dispose() { stage.dispose();
-        }
+        public void dispose() { stage.dispose(); }
 }

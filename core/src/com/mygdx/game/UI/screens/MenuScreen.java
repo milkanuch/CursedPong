@@ -70,6 +70,7 @@ public class MenuScreen implements Screen {
                 cursedPong.setScreen(cursedPong.shopScreen);
             }
         });
+
         exit.setPosition(Const.screenWidth/2  - 125f, (Const.screenHeight/2) - 200f);
         exit.setSize(250, 100);
         exit.addListener(new ClickListener() {

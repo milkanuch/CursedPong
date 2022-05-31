@@ -95,6 +95,12 @@ public class ShopScreen implements Screen {
         update(delta);
         bitmapFont.draw(batch,"Players Models",Const.screenWidth/2,Const.screenHeight - 120f);
         bitmapFont.draw(batch,"Balls Models",Const.screenWidth/2,Const.screenHeight/2 + 170f);
+        bitmapFont.draw(batch,"Current Models",Const.screenWidth/2 - 70f,450);
+
+        batch.draw(Assets.firstPlayer,Const.screenWidth/2 - 100f,300f);
+        batch.draw(Assets.ball,Const.screenWidth/2 - 20f,300f);
+        batch.draw(Assets.secondPlayer,Const.screenWidth/2 + 100f,300f);
+
         batch.end();
         stage.draw();
     }
@@ -212,6 +218,7 @@ public class ShopScreen implements Screen {
                 Assets.ball.load(Assets.ball4.getTextureData());
             }
         });
+
         //players
         stage.addActor(steve);
         stage.addActor(creeper);

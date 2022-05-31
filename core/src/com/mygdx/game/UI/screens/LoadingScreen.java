@@ -15,6 +15,7 @@ public class LoadingScreen implements Screen {
 
         private final ShapeRenderer shapeRenderer;
         private float progress;
+
         public LoadingScreen(CursedPong game){
             this.cursedPong = game;
             this.shapeRenderer = new ShapeRenderer();
@@ -24,12 +25,12 @@ public class LoadingScreen implements Screen {
         public void show() {
             shapeRenderer.setProjectionMatrix(cursedPong.orthographicCamera.combined);
             this.progress = 0f;
-
             cursedPong.assetsManager.load("backgrounds/coffee.png", Texture.class);
             cursedPong.assetsManager.load("ui/skin.atlas", TextureAtlas.class);
         }
 
         private void update() {
+            //Checks our asset's loading
             progress = MathUtils.lerp(progress, cursedPong.assetsManager.getProgress(), .1f);
             if (cursedPong.assetsManager.update() && progress >= cursedPong.assetsManager.getProgress() - .001f) {
                   cursedPong.setScreen(cursedPong.logoScreen);
@@ -47,29 +48,22 @@ public class LoadingScreen implements Screen {
           shapeRenderer.rect(32, cursedPong.orthographicCamera.viewportHeight / 2 - 8, cursedPong.orthographicCamera.viewportWidth - 64, 16);
 
           shapeRenderer.setColor(0.41f, 0.23f,0.72f, 1f);
+          //Renders loading progress bar on screen
           shapeRenderer.rect(32, cursedPong.orthographicCamera.viewportHeight / 2 - 8, progress * (cursedPong.orthographicCamera.viewportWidth - 64), 16);
           shapeRenderer.end();
         }
 
         @Override
-        public void resize(int width, int height) {
-
-        }
+        public void resize(int width, int height) { }
 
         @Override
-        public void pause() {
-
-        }
+        public void pause() { }
 
         @Override
-        public void resume() {
-
-        }
+        public void resume() { }
 
         @Override
-        public void hide() {
-
-        }
+        public void hide() { }
 
         @Override
         public void dispose() {

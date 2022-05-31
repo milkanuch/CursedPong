@@ -29,10 +29,8 @@ public class DifficultyScreen implements Screen {
         //Hard
         Drawable hardImage = new TextureRegionDrawable(new TextureRegion(Assets.hard));
         hard = new ImageButton(hardImage);
-
         Drawable backImage = new TextureRegionDrawable(new TextureRegion(Assets.back));
         back = new ImageButton(backImage);
-
         //Making something like grid where we put our buttons;
         batch = new SpriteBatch();
         this.cursedPong = game;
@@ -43,7 +41,7 @@ public class DifficultyScreen implements Screen {
     public void show() {
         Gdx.input.setInputProcessor(stage);
         stage.clear();
-
+        //Easy difficulty button settings and click listener
         easy.setPosition(Const.screenWidth/2 - 300f,Const.screenHeight/2);
         easy.setSize(250,100);
         easy.addListener(new ClickListener(){
@@ -54,7 +52,7 @@ public class DifficultyScreen implements Screen {
                 Const.arcadeMode = false;
             }
         });
-
+        //Hard difficulty button settings and click listener
         hard.setPosition(Const.screenWidth/2 + 50f,Const.screenHeight/2);
         hard.setSize(250,100);
         hard.addListener(new ClickListener(){
@@ -65,7 +63,7 @@ public class DifficultyScreen implements Screen {
                 Const.arcadeMode = false;
             }
         });
-
+        //Back button settings and click listener
         back.setPosition(Const.screenWidth/2 - 250f,Const.screenHeight/2 - 120f);
         back.setSize(500,100);
         back.addListener(new ClickListener(){
@@ -74,7 +72,7 @@ public class DifficultyScreen implements Screen {
                 cursedPong.setScreen(cursedPong.menuScreen);
             }
         });
-
+        //Adding buttons to screen
         stage.addActor(easy);
         stage.addActor(hard);
         stage.addActor(back);
@@ -94,28 +92,19 @@ public class DifficultyScreen implements Screen {
     private void update(float delta) {
         stage.act(delta);
     }
-    @Override
-    public void resize(int width, int height) {
-
-    }
 
     @Override
-    public void pause() {
-
-    }
+    public void resize(int width, int height) { }
 
     @Override
-    public void resume() {
-
-    }
+    public void pause() { }
 
     @Override
-    public void hide() {
-
-    }
+    public void resume() { }
 
     @Override
-    public void dispose() {
+    public void hide() { }
 
-    }
+    @Override
+    public void dispose() { }
 }

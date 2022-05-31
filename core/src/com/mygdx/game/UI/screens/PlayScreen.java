@@ -1,7 +1,5 @@
 package com.mygdx.game.UI.screens;
 
-import static com.mygdx.game.game.GamePlay.*;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -11,13 +9,11 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Control;
 import com.mygdx.game.CursedPong;
 import com.mygdx.game.ball.Ball;
-import com.mygdx.game.game.GamePlay;
+import com.mygdx.game.game.Gameplay;
 import com.mygdx.game.helpers.Const;
 import com.mygdx.game.models.Assets;
 import com.mygdx.game.players.FirstPlayer;
 import com.mygdx.game.players.SecondPlayer;
-
-import java.text.DecimalFormat;
 
 public class PlayScreen implements Screen {
         private final CursedPong cursedPong;
@@ -30,9 +26,10 @@ public class PlayScreen implements Screen {
         public static SecondPlayer secondPlayer;
 
         private final BitmapFont bitmapFont,timerFont;
-        private final GamePlay gamePlay;
+        private final Gameplay gamePlay;
         public Control control;
         private static float time;
+
         public PlayScreen(final CursedPong game){
             batch = new SpriteBatch();
             ball = new Ball(Assets.ball); //Ball
@@ -43,16 +40,19 @@ public class PlayScreen implements Screen {
             orthographicCamera = new OrthographicCamera();
             orthographicCamera.setToOrtho(false, Const.screenWidth,Const.screenHeight);
             orthographicCamera.position.set(Const.screenWidth,Const.screenHeight,0);
-            //Lines
+            //For keyboard input
             control = new Control();
+            //Fonts for score and timer
             bitmapFont = new BitmapFont();
             timerFont = new BitmapFont();
+            //Font settings
             bitmapFont.setColor(0.9f,0.9f,0.9f,0.9f);
             bitmapFont.getData().setScale(4,4);
             timerFont.setColor(0.9f,0.9f,0.9f,0.9f);
             timerFont.getData().setScale(2,2);
             time = 0;
-            gamePlay = new GamePlay(game);
+
+            gamePlay = new Gameplay();
             this.cursedPong = game;
         }
 
@@ -85,17 +85,18 @@ public class PlayScreen implements Screen {
             gamePlay.secondPlayerLimits(); //Checking if second player over upper/lower limits
             gamePlay.ballLogic();  //Ball logic
 
-            batch.draw(Assets.timer,Const.screenWidth/2 - 60f,Const.screenHeight - 77f,125,66);
-            time += delta;
-            bitmapFont.draw(batch,String.valueOf(Const.firstPlayerScore),230f,Const.screenHeight - 10f);
-            bitmapFont.draw(batch,String.valueOf(Const.secondPlayerScore),Const.screenWidth-300f,Const.screenHeight - 10f);
-            timerFont.draw(batch,String.format("%.0f",time) + " s",Const.screenWidth/2 - 15f,Const.screenHeight - 32f);
+            batch.draw(Assets.timer,Const.screenWidth/2 - 60f,Const.screenHeight - 77f,125,66); //Timer background
+            time += delta; //Time
+            bitmapFont.draw(batch,String.valueOf(Const.firstPlayerScore),230f,Const.screenHeight - 10f); //First User Score
+            bitmapFont.draw(batch,String.valueOf(Const.secondPlayerScore),Const.screenWidth-300f,Const.screenHeight - 10f); //Second Player Score
+            timerFont.draw(batch,String.format("%.0f",time) + " s",Const.screenWidth/2 - 15f,Const.screenHeight - 32f); //Timer
 
             mainMenu();
             setWinner();
             batch.end();
         }
 
+        //For Escape button
         public void mainMenu(){
             if(Const.mainMenu){
                 cursedPong.setScreen(cursedPong.menuScreen);
@@ -103,20 +104,26 @@ public class PlayScreen implements Screen {
             }
         }
 
-        public  void setWinner() {
-            if (Const.firstPlayerScore == 1 || Const.secondPlayerScore == 1) {
-                Const.gameWinner = Const.firstPlayerScore == 1 ? 1 : 2;
-                System.out.println(Const.firstPlayerScore);
-                cursedPong.setScreen(cursedPong.winnersScreen);
-                Const.firstPlayerScore = 0;
-                Const.secondPlayerScore = 0;
+        //Winner screen
+        public void setWinner() {
+            if (Const.firstPlayerScore == 3 || Const.secondPlayerScore == 3) {
+                Const.gameWinner = Const.firstPlayerScore == 3 ? 1 : 2;
+                resetValues();
+                cursedPong.setScreen(cursedPong.winnerScreen);
             }
+        }
+        //Reset player and balls values
+        public void resetValues(){
+            Const.firstPlayerScore = 0;
+            Const.secondPlayerScore = 0;
+            time = 0;
+            Const.speedFirstPlayer = 5;
+            Const.speedSecondPlayer = 5;
+            Const.speedBall = 6;
         }
 
         @Override
-        public void resize(int width, int height) {
-
-        }
+        public void resize(int width, int height) { }
 
         @Override
         public void pause() {
@@ -129,12 +136,8 @@ public class PlayScreen implements Screen {
         }
 
         @Override
-        public void hide() {
-
-        }
+        public void hide() { }
 
         @Override
-        public void dispose() {
-
-        }
+        public void dispose() { }
 }
